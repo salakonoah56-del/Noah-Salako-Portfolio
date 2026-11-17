@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Noah Salako Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+body{margin:0}
+/* Layout: split hero with portrait in a ringed frame, then alternating light/tinted bands, one section per nav item. */
+:root{
+  --bg:#F6F2FC;
+  --surface:#FFFFFF;
+  --band:#E9E0F8;
+  --fg:#1E1233;
+  --muted:#5E5373;
+  --primary:#5B21B6;
+  --primary-fg:#FFFFFF;
+  --accent:#FF7A59;
+  --line:#DDD2F0;
+  --shadow:0 10px 30px rgba(60,20,120,.14);
+  --font-display:"Space Grotesk",system-ui,sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#130B22;--surface:#1D1233;--band:#181029;--fg:#F0EAFB;--muted:#B3A6CC;
+    --primary:#A78BFA;--primary-fg:#1A0B38;--accent:#FF9272;--line:#33224F;--shadow:0 10px 30px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#130B22;--surface:#1D1233;--band:#181029;--fg:#F0EAFB;--muted:#B3A6CC;
+    --primary:#A78BFA;--primary-fg:#1A0B38;--accent:#FF9272;--line:#33224F;--shadow:0 10px 30px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0;overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin-inline:auto}
+section{padding-block:72px}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid transparent}
+.bar{max-width:1120px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;text-decoration:none;font-size:18px}
+.logo b{width:36px;height:36px;border-radius:10px;background:var(--primary);color:var(--primary-fg);display:grid;place-items:center;font-size:16px}
+nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0;align-items:center}
+nav a{display:block;padding:8px 12px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--fg)}
+nav a.active{color:var(--primary);background:var(--band)}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--line);color:var(--fg);width:44px;height:44px;border-radius:12px;cursor:pointer;font-size:20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:2px solid var(--primary);cursor:pointer;font-family:var(--font-body)}
+.btn.solid{background:var(--primary);color:var(--primary-fg)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--primary)}
+.btn.solid:hover{filter:brightness(1.08)}
+
+/* hero */
+.hero{padding-block:48px 80px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hello{font-weight:600;color:var(--muted);font-size:18px}
+.hero h1{font-size:clamp(40px,6vw,68px);color:var(--primary);margin-block:6px 18px;letter-spacing:-.02em}
+.hero h1 span{display:block;color:var(--fg)}
+.role{display:inline-block;background:var(--band);color:var(--primary);font-weight:600;padding:6px 14px;border-radius:999px;font-size:14px;margin-bottom:16px}
+.hero p.lead{color:var(--muted);max-width:52ch;margin-bottom:28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.portrait{position:relative;justify-self:center;width:min(100%,420px)}
+.portrait .ring{position:absolute;inset:-14px;border-radius:50%;border:2px dashed var(--line)}
+.portrait .blob{position:absolute;inset:auto auto -18px -18px;width:62%;aspect-ratio:1;border-radius:50%;background:var(--primary);opacity:.9}
+.portrait .dots{position:absolute;right:-18px;top:-10px;width:110px;height:110px;background-image:radial-gradient(var(--accent) 2.4px,transparent 2.6px);background-size:16px 16px;opacity:.85}
+.portrait img{position:relative;display:block;width:100%;aspect-ratio:1/1.1;object-fit:cover;object-position:50% 30%;border-radius:200px 200px 28px 28px;background:var(--band);box-shadow:var(--shadow)}
+.chip{position:absolute;background:var(--surface);color:var(--fg);padding:10px 14px;border-radius:14px;box-shadow:var(--shadow);font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;z-index:2;border:1px solid var(--line)}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block}
+.chip.a{left:-14px;top:22%}
+.chip.b{right:-10px;bottom:12%}
+
+/* generic section heads */
+.head{text-align:center;max-width:620px;margin:0 auto 44px}
+.head h2{font-size:clamp(30px,4vw,42px);margin-bottom:10px}
+.head p{color:var(--muted)}
+.tint{background:var(--band);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+
+/* about */
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:center}
+.about .photo{position:relative;max-width:360px;justify-self:center;width:100%}
+.about .photo img{display:block;width:100%;aspect-ratio:1/1.15;object-fit:cover;object-position:50% 25%;border-radius:28px;box-shadow:var(--shadow)}
+.about .photo::before{content:"";position:absolute;inset:18px -18px -18px 18px;border-radius:28px;background:var(--primary);opacity:.18;z-index:-1}
+.about h2{font-size:clamp(30px,4vw,42px);margin-bottom:8px}
+.about .sub{color:var(--muted);margin-bottom:24px}
+.facts{display:grid;gap:14px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.fact h3{font-size:14px;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);margin-bottom:6px}
+.fact p{color:var(--fg)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tags span{background:var(--band);border-radius:999px;padding:5px 14px;font-weight:600;font-size:14px;color:var(--primary)}
+
+/* skills */
+.grid4{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:10px;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.ic{width:52px;height:52px;border-radius:14px;background:var(--band);color:var(--primary);display:grid;place-items:center;margin-bottom:6px}
+.ic svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:20px}
+.card p{color:var(--muted);font-size:15px}
+
+/* projects */
+.proj{display:flex;flex-direction:column;overflow:hidden;padding:0}
+.shot{height:170px;background:var(--primary);position:relative;overflow:hidden;color:var(--primary-fg)}
+.shot svg{position:absolute;inset:0;width:100%;height:100%}
+.proj .body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.proj h3{font-size:20px}
+.built{margin-top:auto;padding-top:8px;font-size:14px;color:var(--fg);font-weight:600}
+.status{align-self:flex-start;background:var(--band);color:var(--primary);font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px}
+
+/* education */
+.edu{max-width:760px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:34px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;box-shadow:var(--shadow)}
+.edu .ic{width:64px;height:64px;border-radius:18px;background:var(--primary);color:var(--primary-fg)}
+.edu h3{font-size:24px;margin-bottom:4px}
+.edu dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 20px;margin:16px 0 0}
+.edu dt{color:var(--muted);font-size:14px}
+.edu dd{margin:0;font-weight:600}
+
+/* contact */
+.contact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:860px;margin-inline:auto}
+.c{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 24px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.c .lab{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary)}
+.c .val{font-weight:600;font-size:17px;overflow-wrap:anywhere;user-select:all}
+.c .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.mini{background:var(--band);color:var(--primary);border:0;border-radius:999px;padding:7px 14px;font-weight:600;font-size:13px;cursor:pointer;font-family:var(--font-body);text-decoration:none}
+.mini:hover{filter:brightness(.95)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:80}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+footer{border-top:1px solid var(--line);padding-block:28px;text-align:center;color:var(--muted);font-size:14px}
+
+@media (max-width:860px){
+  .hero .wrap,.about{grid-template-columns:1fr}
+  .hero{padding-block:24px 56px}
+  .portrait{order:-1;width:min(86%,340px)}
+  .grid4{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr}
+  .menu-btn{display:block}
+  nav{position:absolute;left:0;right:0;top:68px;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-left,0px)) 16px;display:none}
+  nav.open{display:block}
+  nav ul{flex-direction:column;align-items:stretch}
+  nav a{padding:12px 14px;font-size:16px}
+  section{padding-block:56px}
+  .edu{grid-template-columns:1fr;padding:26px}
+  .edu dl{grid-template-columns:1fr;gap:2px}
+  .edu dt{margin-top:10px}
+  .chip.a{left:-6px}.chip.b{right:-6px}
+}
+@media (min-width:861px) and (max-width:1020px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}.card:hover{transform:none}}
+
+/* refinements */
+.stats{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:440px}
+.stats li{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column}
+.stats b{font-family:var(--font-display);font-size:20px;color:var(--primary);line-height:1.2}
+.stats span{font-size:12px;color:var(--muted)}
+.btn{min-height:48px}
+.chip{white-space:nowrap}
+.hero h1{overflow-wrap:anywhere}
+.card .ic{flex:none}
+
+@media (max-width:860px){
+  .bar{height:64px}
+  nav{top:64px;box-shadow:0 18px 30px rgba(0,0,0,.12)}
+  nav li:last-child{margin-top:8px}
+  nav li:last-child a{text-align:center}
+  html{scroll-padding-top:72px}
+  .hero .wrap{gap:28px;text-align:center}
+  .hero p.lead{margin-inline:auto}
+  .actions{justify-content:center}
+  .actions .btn{flex:1 1 150px}
+  .stats{margin-inline:auto}
+  .stats li{align-items:center}
+  .hello{font-size:16px}
+  .portrait{width:min(78%,300px);margin-top:8px}
+  .portrait .dots{width:80px;height:80px;right:-12px}
+  .chip{font-size:12px;padding:8px 11px}
+  .chip.a{left:-10px;top:14%}
+  .chip.b{right:-10px;bottom:8%}
+  .head{margin-bottom:28px;text-align:left}
+  .head h2{font-size:30px}
+  .about{gap:28px}
+  .about .photo{max-width:260px}
+  .about h2{font-size:30px}
+  .about>div:last-child{text-align:left}
+  .fact{padding:16px 18px}
+  .grid4{gap:14px}
+  .card{padding:20px;border-radius:18px}
+  .proj{padding:0}
+  .shot{height:150px}
+  .edu{padding:22px;border-radius:20px}
+  .c{padding:18px 20px}
+  .c .row .mini{flex:1 1 auto;text-align:center;padding:10px 14px}
+  section{padding-block:48px}
+}
+/* skills: compact two-up cards on phones */
+@media (max-width:860px){
+  #skills .grid4{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  #skills .card{padding:16px;gap:6px}
+  #skills .card .ic{width:44px;height:44px;border-radius:12px}
+  #skills .card h3{font-size:16px}
+  #skills .card p{font-size:13.5px;line-height:1.5}
+}
+@media (max-width:360px){
+  #skills .grid4{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .stats li{padding:10px 8px}
+  .hero h1{font-size:36px}
+}
+
+/* square, face-centred portraits */
+.portrait{width:min(100%,380px)}
+.portrait img{height:auto;aspect-ratio:1/1;border-radius:50%;object-fit:cover;object-position:50% 40%;border:6px solid var(--surface)}
+.portrait .ring{inset:-16px}
+.about .photo img{height:auto;aspect-ratio:1/1;object-position:50% 40%;border-radius:32px}
+@media (max-width:860px){.portrait{width:min(72%,280px)}.about .photo{max-width:240px}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <a class="logo" href="#home" aria-label="Noah Salako, home"><b>NS</b><span>Noah Salako</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+    <nav id="nav" aria-label="Main">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">My Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a class="btn solid" href="#contact" style="padding:9px 20px;color:var(--primary-fg)">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="wrap">
+    <div>
+      <p class="hello">Hi, I am</p>
+      <h1>Salako Noah <span>Iyanuoluwa</span></h1>
+      <span class="role">Student &middot; Aspiring Web Developer</span>
+      <p class="lead">Welcome to my portfolio! I am Noah, a passionate Information Technology student who loves turning ideas into beautiful, functional websites. Explore my skills, projects, and journey as I work towards becoming a professional Frontend Developer.</p>
+      <div class="actions">
+        <a class="btn solid" href="#contact">Contact Me</a>
+        <a class="btn ghost" href="#projects">View Projects</a>
+      </div>
+      <ul class="stats" aria-label="Quick facts">
+        <li><b>200</b><span>Level, IT</span></li>
+        <li><b>3</b><span>Projects</span></li>
+        <li><b>Lagos</b><span>Nigeria</span></li>
+      </ul>
+    </div>
+    <div class="portrait">
+      <div class="ring"></div><div class="blob"></div><div class="dots"></div>
+      <img src="images/noah.jpg" alt="Portrait of Noah Salako" width="640" height="640">
+      <div class="chip a"><i></i>IT Student, 200 Level</div>
+      <div class="chip b"><i></i>Based in Lagos</div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="padding-top:24px">
+  <div class="wrap about">
+    <div class="photo"><img src="images/noah.jpg" alt="Noah Salako" width="640" height="640"></div>
+    <div>
+      <h2>About Me</h2>
+      <p class="sub">A student who builds, designs and edits, and works with real businesses every day.</p>
+      <div class="facts">
+        <div class="fact"><h3>My Background</h3><p>My name is Salako Noah Iyanuoluwa. I am from Osun State, Nigeria, and I am currently based in Lagos. I am currently working with Moniepoint while studying, which has taught me discipline, customer service, and how real businesses use technology every day.</p></div>
+        <div class="fact"><h3>My Course of Study</h3><p>Information Technology at Miva Open University.</p></div>
+        <div class="fact"><h3>My Interests</h3><div class="tags"><span>Music</span><span>Video Editing</span><span>Graphics Design</span></div><p style="margin-top:10px">I love creativity. Whether it is designing a flyer, editing a video, or building a website, I enjoy making things that people love to look at and use.</p></div>
+        <div class="fact"><h3>My Career Goals</h3><p>My goal is to become a professional Frontend Developer. I want to build modern, responsive, and user-friendly websites for businesses, churches, and brands in Nigeria and beyond.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="tint">
+  <div class="wrap">
+    <div class="head"><h2>My Skills</h2><p>The tools I use to build, design and communicate.</p></div>
+    <div class="grid4">
+      <article class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></div><h3>HTML</h3><p>Structure and layout of web pages.</p></article>
+      <article class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div><h3>CSS</h3><p>Styling, colours, and responsive design.</p></article>
+      <article class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-1 7 9-11h-7z"/></svg></div><h3>JavaScript</h3><p>Interactive and dynamic websites.</p></article>
+      <article class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg></div><h3>Microsoft Office</h3><p>Word, Excel and PowerPoint for documentation and presentations.</p></article>
+      <article class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18c1.5 0 2-1 1.5-2s0-2.5 1.5-2.5H17a4 4 0 004-4c0-5-4-9.5-9-9.5z"/><circle cx="7.5" cy="11" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="16" cy="8" r="1"/></svg></div><h3>Canva</h3><p>Graphics design for flyers, social media and branding.</p></article>
+      <article class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></div><h3>Communication and Teamwork</h3><p>I work well with others and communicate clearly.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="head"><h2>My Projects</h2><p>Three projects I am building to put my skills into practice.</p></div>
+    <div class="grid4">
+      <article class="card proj">
+        <div class="shot" aria-hidden="true"><svg viewBox="0 0 300 170" preserveAspectRatio="xMidYMid slice"><rect width="300" height="170" fill="var(--primary)"/><rect x="40" y="30" width="220" height="120" rx="10" fill="var(--surface)"/><rect x="40" y="30" width="220" height="18" rx="10" fill="var(--band)"/><circle cx="54" cy="39" r="3" fill="var(--accent)"/><circle cx="65" cy="39" r="3" fill="var(--muted)"/><rect x="58" y="62" width="60" height="9" rx="4" fill="var(--primary)"/><rect x="58" y="78" width="90" height="6" rx="3" fill="var(--line)"/><rect x="58" y="90" width="80" height="6" rx="3" fill="var(--line)"/><rect x="58" y="108" width="40" height="14" rx="7" fill="var(--accent)"/><circle cx="212" cy="88" r="28" fill="var(--band)"/><circle cx="212" cy="80" r="9" fill="var(--primary)"/><path d="M194 108a18 14 0 0136 0z" fill="var(--primary)"/></svg></div>
+        <div class="body"><span class="kicker">Web Development</span><h3>Personal Portfolio Website</h3><p>A personal website to showcase my skills, education, and contact.</p><span class="status">Link: Coming soon</span><p class="built">Built with: HTML, CSS and JavaScript</p></div>
+      </article>
+      <article class="card proj">
+        <div class="shot" aria-hidden="true"><svg viewBox="0 0 300 170" preserveAspectRatio="xMidYMid slice"><rect width="300" height="170" fill="var(--primary)"/><rect x="30" y="26" width="240" height="118" rx="10" fill="var(--surface)"/><rect x="46" y="42" width="110" height="12" rx="5" fill="var(--primary)"/><rect x="46" y="62" width="130" height="6" rx="3" fill="var(--line)"/><rect x="46" y="74" width="100" height="6" rx="3" fill="var(--line)"/><rect x="46" y="100" width="64" height="18" rx="9" fill="var(--accent)"/><rect x="196" y="42" width="60" height="26" rx="6" fill="var(--band)"/><rect x="196" y="76" width="60" height="26" rx="6" fill="var(--band)"/><rect x="196" y="110" width="60" height="22" rx="6" fill="var(--band)"/></svg></div>
+        <div class="body"><span class="kicker">Practice Project</span><h3>Moniepoint Agent Landing Page</h3><p>A simple landing page designed for a POS / Moniepoint agent business, showing services, charges, and contact button.</p><p class="built">Built with: HTML &amp; CSS</p></div>
+      </article>
+      <article class="card proj">
+        <div class="shot" aria-hidden="true"><svg viewBox="0 0 300 170" preserveAspectRatio="xMidYMid slice"><rect width="300" height="170" fill="var(--primary)"/><rect x="34" y="28" width="68" height="52" rx="8" fill="var(--surface)"/><rect x="116" y="28" width="68" height="52" rx="8" fill="var(--accent)"/><rect x="198" y="28" width="68" height="52" rx="8" fill="var(--surface)"/><rect x="34" y="92" width="68" height="52" rx="8" fill="var(--band)"/><rect x="116" y="92" width="68" height="52" rx="8" fill="var(--surface)"/><rect x="198" y="92" width="68" height="52" rx="8" fill="var(--band)"/><path d="M138 52l16 10-16 10z" fill="var(--primary)"/><circle cx="68" cy="54" r="12" fill="var(--primary)" opacity=".5"/></svg></div>
+        <div class="body"><span class="kicker">Creative</span><h3>Music &amp; Graphics Design Portfolio Page</h3><p>A gallery page to showcase my graphics designs, video editing work, and music interests.</p><p class="built">Built with: HTML, CSS &amp; Canva</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="tint">
+  <div class="wrap">
+    <div class="head"><h2>Education</h2><p>Where I am studying and what I have completed so far.</p></div>
+    <div class="edu">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.500 6-3v-4.500"/></svg></div>
+      <div>
+        <h3>Miva Open University</h3>
+        <p style="color:var(--muted)">Information Technology</p>
+        <dl>
+          <dt>Institution</dt><dd>Miva Open University</dd>
+          <dt>Programme</dt><dd>Information Technology</dd>
+          <dt>Academic Level</dt><dd>200 Level</dd>
+          <dt>Relevant Certifications</dt><dd>Digital Transformation with Google Cloud</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="head"><h2>Contact Me</h2><p>Have a project, a flyer or a website in mind? Reach out.</p></div>
+    <div class="contact">
+      <div class="c"><span class="lab">Phone</span><span class="val">09067039585</span><span class="val">09067029585</span><div class="row"><button class="mini" data-copy="09067039585">Copy first number</button><button class="mini" data-copy="09067029585">Copy second number</button></div></div>
+      <div class="c"><span class="lab">Personal Email</span><span class="val">Salakonoah56@gmail.com</span><div class="row"><button class="mini" data-copy="Salakonoah56@gmail.com">Copy email</button><a class="mini" href="mailto:Salakonoah56@gmail.com">Write an email</a></div></div>
+      <div class="c"><span class="lab">School Email</span><span class="val">n.salako5552@miva.edu.ng</span><div class="row"><button class="mini" data-copy="n.salako5552@miva.edu.ng">Copy email</button></div></div>
+      <div class="c"><span class="lab">Location</span><span class="val">Lagos, Nigeria</span><p style="color:var(--muted);font-size:15px">Open to web design and frontend work for businesses, churches and brands.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>&copy; 2026 Salako Noah Iyanuoluwa. Built with HTML, CSS and JavaScript.</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),nav=document.getElementById('nav'),toast=document.getElementById('toast'),t;
+  btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o);});
+  nav.addEventListener('click',function(e){if(e.target.closest('a')){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
+  function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(t);t=setTimeout(function(){toast.classList.remove('show');},1800);}
+  function fallback(text){var r=document.createRange(),s=window.getSelection();var el=document.createElement('span');el.textContent=text;el.style.cssText='position:fixed;opacity:0';document.body.appendChild(el);r.selectNodeContents(el);s.removeAllRanges();s.addRange(r);var ok=false;try{ok=document.execCommand('copy');}catch(e){}s.removeAllRanges();el.remove();return ok;}
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var v=b.getAttribute('data-copy');
+      var done=function(){say('Copied '+v);};
+      var fail=function(){say(fallback(v)?'Copied '+v:'Select the text to copy it');};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).then(done,fail);}else{fail();}
+    });
+  });
+  var links=[].slice.call(document.querySelectorAll('nav a[href^="#"]:not(.btn)'));
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&map[e.target.id]){links.forEach(function(l){l.classList.remove('active');});map[e.target.id].classList.add('active');}});},{rootMargin:'-45% 0px -50% 0px'});
+    Object.keys(map).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s);});
+  }
+})();
+</script>
+
+</body>
+</html>
